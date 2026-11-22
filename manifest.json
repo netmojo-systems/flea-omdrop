@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "netmojo.omdrop",
+  "name": "Omdrop",
+  "version": "0.1.0",
+  "author": "netmojo",
+  "license": "MIT",
+  "description": "Send selected files to nearby Apple devices through Omdrop.",
+  "kinds": ["send-target"],
+  "sendTargets": {"label": "Omdrop", "glyph": "network", "refreshSec": 5},
+  "access": ["selection", "network", "notify", "exec:omdrop", "exec:systemd-run", "exec:notify-send"],
+  "entryPoints": {"run": "plugin.py"}
+}
