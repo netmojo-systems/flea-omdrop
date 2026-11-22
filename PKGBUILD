@@ -4,7 +4,7 @@ pkgver=0.1.0
 pkgrel=1
 pkgdesc='Omdrop send target for the Flea file manager'
 arch=(any)
-url='https://github.com/netmojo/flea-omdrop'
+url='https://github.com/netmojo-systems/flea-omdrop'
 license=(MIT)
 depends=('flea>=0.4.3' 'omdrop>=0.18.12' python systemd libnotify)
 PKGEXT='.pkg.tar.zst'

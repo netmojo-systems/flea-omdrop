@@ -6,7 +6,7 @@ Send selected files to nearby Apple devices from stock [Flea](https://github.com
 
 Install and configure [Omdrop](https://github.com/netmojo-systems/omdrop-plugin) and its supported radio driver first. You need a working `omdrop` CLI, a systemd user session and a desktop notification service.
 
-Download `flea-omdrop-0.1.0-1-any.pkg.tar.zst` and `SHA256SUMS` from the [release](https://github.com/netmojo/flea-omdrop/releases/tag/v0.1.0). In the download directory:
+Download `flea-omdrop-0.1.0-1-any.pkg.tar.zst` and `SHA256SUMS` from the [release](https://github.com/netmojo-systems/flea-omdrop/releases/tag/v0.1.0). In the download directory:
 
 ```sh
 sha256sum -c SHA256SUMS
@@ -22,7 +22,7 @@ This is a prebuilt, architecture-independent Arch package. The adapter uses Pyth
 With `flea`, `omdrop`, Python 3, systemd, util-linux and `notify-send` installed:
 
 ```sh
-flea plugin add https://github.com/netmojo/flea-omdrop.git
+flea plugin add https://github.com/netmojo-systems/flea-omdrop.git
 flea plugin enable netmojo.omdrop
 ```
 
