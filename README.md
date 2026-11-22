@@ -1,6 +1,6 @@
 # Omdrop for Flea
 
-Send selected files to nearby Apple devices from stock [Flea](https://github.com/thisisgm/flea) 0.4.3. This independent plugin adds an **Omdrop** row to the file menu. It does not replace Flea’s built-in Owly provider or change your AirDrop receiving settings.
+On Apple Silicon machines, send selected files to nearby Apple devices from stock [Flea](https://github.com/thisisgm/flea) 0.4.3. This independent plugin adds an **Omdrop** row to the file menu. It does not replace Flea’s built-in Owly provider or change your AirDrop receiving settings.
 
 ## Install on Omarchy or Arch Linux
 
