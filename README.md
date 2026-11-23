@@ -1,6 +1,6 @@
 # Omdrop for Flea
 
-On Apple Silicon machines, send selected files to nearby Apple devices from stock [Flea](https://github.com/thisisgm/flea) 0.4.3. This independent plugin adds an **Omdrop** row to the file menu. It does not replace Flea’s built-in Owly provider or change your AirDrop receiving settings.
+On Apple Silicon machines, send selected files to nearby Apple devices from stock [Flea](https://github.com/thisisgm/flea) 0.4.3. This independent plugin appears as **AirDrop** in the file menu and **Omdrop** in Settings > Plugins. It does not replace Flea’s built-in Owly provider or change your AirDrop receiving settings.
 
 ## Install on Omarchy or Arch Linux
 
@@ -32,7 +32,7 @@ Use `flea plugin update netmojo.omdrop` for Git installs only. Choose one instal
 
 1. Turn on Omdrop and make the receiving device discoverable.
 2. Select local files in Flea and open their file menu. If discovery has just started, reopen the menu after nearby devices have had time to answer.
-3. Choose the receiver under **Omdrop**. Discovery uses device addresses as target IDs, not display names.
+3. Choose the receiver under **AirDrop**. Discovery uses device addresses as target IDs, not display names.
 
 **Queued** means the systemd user manager started a separate send job, not that the receiver accepted. You can close Flea or leave the prompt open beyond Flea’s 30-second plugin deadline. The job reports Omdrop’s result in a desktop notification. Disabling the plugin does not cancel a queued send. Omdrop and the receiver still enforce their own timeouts.
 
