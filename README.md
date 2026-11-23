@@ -1,6 +1,12 @@
 # Omdrop for Flea
 
-On Apple Silicon machines, send selected files to nearby Apple devices from stock [Flea](https://github.com/thisisgm/flea) 0.4.3. This independent plugin appears as **Omdrop** in the file menu and in Settings > Plugins. It does not replace Flea’s built-in Owly provider or change your AirDrop receiving settings.
+**Recommended:** If you don’t mind waiting for a large Rust build, install [Flea’s native Omdrop integration (PR #468)](https://github.com/thisisgm/flea/pull/468). On Apple Silicon, it lets you send files from Flea’s **AirDrop** menu, see transfer progress inside Flea, and manage receiving in **Settings → Plugins → AirDrop**. You don’t need this standalone plugin with that build.
+
+Ask your coding agent:
+
+> Build and install https://github.com/thisisgm/flea/pull/468 locally for the full Omdrop integration.
+
+**Prefer stock Flea without a rebuild?** Install the standalone plugin below. It adds a separate **Omdrop** entry to the file menu and **Settings → Plugins** in Flea 0.4.3, and leaves the built-in AirDrop settings unchanged.
 
 ## Install on Omarchy or Arch Linux
 
