@@ -1,0 +1,48 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    timeout-minutes: 15
+    steps:
+      - name: Install test and packaging tools
+        run: pacman -Syu --noconfirm --needed base-devel git python
+
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Run notification tests and build as a regular user
+        run: |
+          useradd --create-home tester
+          chown -R tester .
+          runuser -u tester -- python3 tests/progress.py
+          # Flea and Omdrop are end-user dependencies, not needed to build or handshake.
+          runuser -u tester -- makepkg --nodeps --noconfirm
+
+      - name: Check the installed package answers Flea's handshake
+        run: |
+          pacman -Udd --noconfirm ./*.pkg.tar.zst
+          cd /usr/share/flea-omdrop
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          manifest = json.loads(Path('manifest.json').read_text())
+          entry = Path(manifest['entryPoints']['run']).resolve()
+          hello = {'op': 'hello', 'protocolVersion': 1, 'kinds': manifest['kinds']}
+          reply = subprocess.run([entry], input=json.dumps(hello) + '\n', text=True,
+                                 stdout=subprocess.PIPE, check=True, timeout=5)
+          assert json.loads(reply.stdout) == {'op': 'ready', 'protocolVersion': 1}, reply.stdout
+          PY
