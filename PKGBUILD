@@ -11,7 +11,7 @@ PKGEXT='.pkg.tar.zst'
 
 package() {
     local file
-    for file in discovery.py delivery.py; do
+    for file in discovery.py delivery.py progress.py; do
         install -Dm644 "$startdir/$file" "$pkgdir/usr/lib/$pkgname/$file"
     done
     install -Dm755 "$startdir/plugin.py" "$pkgdir/usr/lib/$pkgname/plugin.py"

@@ -34,7 +34,7 @@ Use `flea plugin update netmojo.omdrop` for Git installs only. Choose one instal
 2. Select local files in Flea and open their file menu. If discovery has just started, reopen the menu after nearby devices have had time to answer.
 3. Choose the receiver under **Omdrop**. Discovery uses device addresses as target IDs, not display names.
 
-**Queued** means the systemd user manager started a separate send job, not that the receiver accepted. You can close Flea or leave the prompt open beyond Flea’s 30-second plugin deadline. The job reports Omdrop’s result in a desktop notification. Disabling the plugin does not cancel a queued send. Omdrop and the receiver still enforce their own timeouts.
+**Queued** means the systemd user manager started a separate send job, not that the receiver accepted. You can close Flea or leave the prompt open beyond Flea’s 30-second plugin deadline. When Omdrop reports byte counts, one desktop notification shows the file name or file count, percentage, and bytes read for upload. Even 100% is not a delivery receipt. Omdrop’s final result replaces the progress notification; sends without byte counts report only their outcome. Disabling the plugin does not cancel a queued send. Omdrop and the receiver still enforce their own timeouts.
 
 ## Remove
 
