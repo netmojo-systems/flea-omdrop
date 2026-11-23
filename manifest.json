@@ -7,7 +7,7 @@
   "license": "MIT",
   "description": "Send selected files to nearby Apple devices. Built on Omdrop by Brent Kearney (@brentkearney).",
   "kinds": ["send-target"],
-  "sendTargets": {"label": "AirDrop", "glyph": "network", "refreshSec": 5},
+  "sendTargets": {"label": "Omdrop", "glyph": "smartphone", "refreshSec": 5},
   "access": ["selection", "network", "notify", "exec:omdrop", "exec:systemd-run", "exec:notify-send"],
   "entryPoints": {"run": "plugin.py"}
 }
