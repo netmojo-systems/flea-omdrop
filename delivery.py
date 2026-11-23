@@ -1,7 +1,6 @@
 """Hand off Flea sends to the user manager and report the actual Omdrop result."""
 
 import fcntl
-import html
 import os
 from pathlib import Path
 import select
@@ -9,11 +8,13 @@ import subprocess
 import sys
 import uuid
 
+from progress import Notification
+
 
 _STDERR_LIMIT = 8192
 
 
-def _run(argv, *, own_session=False):
+def _run(argv, *, own_session=False, on_stderr=None):
     """Keep a bounded stderr tail without waiting on pipes inherited by grandchildren."""
     with subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
                           stderr=subprocess.PIPE, start_new_session=own_session) as child:
@@ -31,13 +32,18 @@ def _run(argv, *, own_session=False):
                     # a still-running helper may have inherited the write end.
                     os.set_blocking(fd, False)
                     try:
-                        tail.extend(os.read(fd, fcntl.fcntl(fd, fcntl.F_GETPIPE_SZ))[-_STDERR_LIMIT:])
+                        block = os.read(fd, fcntl.fcntl(fd, fcntl.F_GETPIPE_SZ))
+                        if on_stderr:
+                            on_stderr(block)
+                        tail.extend(block[-_STDERR_LIMIT:])
                     except BlockingIOError:
                         pass
                     break
                 block = os.read(fd, _STDERR_LIMIT)
                 if not block:
                     break
+                if on_stderr:
+                    on_stderr(block)
                 tail.extend(block)
                 del tail[:-_STDERR_LIMIT]
         finally:
@@ -75,10 +81,12 @@ def enqueue(mac, paths):
 def deliver(mac, paths):
     """Run as the service's main process. Notification failures never change its verdict."""
     count = len(paths)
+    notice = Notification(paths)
     try:
         # When sending turns Omdrop on, the 1Password identity prompt needs
         # a live session leader. Let the CLI lead its own session until it exits.
-        code, stderr = _run(['omdrop', 'send', f'--to={mac}', '--', *paths], own_session=True)
+        code, stderr = _run(['omdrop', 'send', f'--to={mac}', '--', *paths],
+                            own_session=True, on_stderr=notice.feed)
     except OSError as error:
         code, stderr = 1, str(error)
     if code == 0:
@@ -90,9 +98,5 @@ def deliver(mac, paths):
         title = 'Omdrop: send failed'
         body = f'Could not send to {mac}: ' + (_reason(stderr) or f'omdrop exited with status {code}.')
     print(f'{title}: {body}', flush=True)
-    try:
-        subprocess.run(['notify-send', '--app-name=Flea', '--', title, html.escape(body)],
-                       stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, timeout=5, check=True)
-    except (OSError, subprocess.SubprocessError) as error:
-        print(f'Could not show the Omdrop notification: {error}', file=sys.stderr)
+    notice.finish(title, body)
     return int(code != 0)
