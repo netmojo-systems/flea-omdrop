@@ -6,7 +6,7 @@ Ask your coding agent:
 
 > Build and install https://github.com/thisisgm/flea/pull/468 locally for the full Omdrop integration.
 
-**Prefer stock Flea without a rebuild?** Install the standalone plugin below. It adds a separate **Omdrop** entry to the file menu and **Settings → Plugins** in Flea 0.4.3, and leaves the built-in AirDrop settings unchanged.
+**Prefer stock Flea without a rebuild?** Install the standalone plugin below. It adds a separate **Omdrop** entry to the file menu and **Settings → Plugins** in Flea 0.4.3, and leaves the built-in AirDrop settings unchanged, but unusable on a Mac.
 
 ## Install on Omarchy or Arch Linux
 
