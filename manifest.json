@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "netmojo",
   "license": "MIT",
-  "description": "Send selected files to nearby Apple devices through Omdrop.",
+  "description": "Send selected files to nearby Apple devices. Built on Omdrop by Brent Kearney (@brentkearney).",
   "kinds": ["send-target"],
   "sendTargets": {"label": "AirDrop", "glyph": "network", "refreshSec": 5},
   "access": ["selection", "network", "notify", "exec:omdrop", "exec:systemd-run", "exec:notify-send"],
